@@ -60,8 +60,8 @@ final class SendMessageTool extends Tool
 
         return Response::text(
             "Your message has been successfully sent to **#{$channel}**.\n\n" .
-            "Message ID: #{$message->id}\n\n" .
-            "💡 You may view messages in this channel using [get-channel-messages]."
+                "Message ID: #{$message->id}\n\n" .
+                "💡 You may view messages in this channel using [get-channel-messages]."
         );
     }
 

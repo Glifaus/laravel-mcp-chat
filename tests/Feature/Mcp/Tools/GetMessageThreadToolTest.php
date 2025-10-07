@@ -169,4 +169,3 @@ it('orders replies chronologically', function () {
     $response->assertSee('Third reply');
     $response->assertSee('3 replies');
 });
-

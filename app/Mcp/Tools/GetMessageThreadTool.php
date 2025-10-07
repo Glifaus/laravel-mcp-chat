@@ -56,7 +56,7 @@ final class GetMessageThreadTool extends Tool
                 if ($reply->reactions->isNotEmpty()) {
                     $reactionsSummary = $reply->reactions
                         ->groupBy('emoji')
-                        ->map(fn ($group) => $group->first()->emoji . ' ' . $group->count())
+                        ->map(fn($group) => $group->first()->emoji . ' ' . $group->count())
                         ->join(' ');
 
                     $output .= "  Reactions: {$reactionsSummary}\n";

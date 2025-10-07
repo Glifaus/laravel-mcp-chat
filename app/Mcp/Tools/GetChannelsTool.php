@@ -38,12 +38,12 @@ final class GetChannelsTool extends Tool
         $output = "Active channels in Laravelchat ({$channels->count()} channels):\n\n";
 
         foreach ($channels as $channel) {
-            $lastActivity = $channel->last_activity 
+            $lastActivity = $channel->last_activity
                 ? \Carbon\Carbon::parse($channel->last_activity)->diffForHumans()
                 : 'never';
 
-            $output .= "- **#{$channel->channel}** - {$channel->message_count} " 
-                . str('message')->plural($channel->message_count) 
+            $output .= "- **#{$channel->channel}** - {$channel->message_count} "
+                . str('message')->plural($channel->message_count)
                 . " (last activity {$lastActivity})\n";
         }
 

@@ -26,6 +26,7 @@ $table->foreignId('parent_id')
 ```
 
 **Características:**
+
 - `parent_id` nullable (para mensajes principales)
 - Foreign key a la misma tabla `messages`
 - Cascade delete (si se borra el padre, se borran las respuestas)
@@ -55,6 +56,7 @@ public function replies(): HasMany
 ```
 
 **Uso:**
+
 ```php
 // Obtener el mensaje padre
 $reply = Message::find(5);
@@ -75,6 +77,7 @@ $repliesCount = $message->replies()->count();
 Permite crear respuestas (replies) a mensajes específicos, iniciando hilos de conversación.
 
 **Características:**
+
 - Valida que el mensaje padre existe
 - Crea respuesta con `parent_id` establecido
 - Muestra preview del mensaje padre (truncado a 50 chars)
@@ -102,6 +105,7 @@ Reply ID: #5
 ```
 
 **Validaciones:**
+
 - `parent_message_id`: requerido, integer, debe existir en messages
 - `name`: requerido, string, 1-50 caracteres
 - `content`: requerido, string, 1-500 caracteres
@@ -113,6 +117,7 @@ Reply ID: #5
 Muestra un mensaje con todas sus respuestas en formato de hilo.
 
 **Características:**
+
 - Muestra mensaje padre con metadata
 - Cuenta total de respuestas
 - Lista todas las respuestas cronológicamente
@@ -163,6 +168,7 @@ _No replies yet. Be the first to reply!_
 ```
 
 **Validaciones:**
+
 - `message_id`: requerido, integer, debe existir en messages
 
 ---
@@ -172,32 +178,38 @@ _No replies yet. Be the first to reply!_
 ### ReplyToMessageToolTest (9 tests)
 
 ✅ **Funcionalidad básica:**
+
 - `it can reply to a message` - Crea respuesta correctamente
 - `it shows reply ID in response` - Muestra el ID de la nueva respuesta
 - `it can create multiple replies to same parent` - Múltiples respuestas al mismo mensaje
 
 ✅ **Validaciones:**
+
 - `it fails when parent message does not exist` - Error si no existe el padre
 - `it validates required fields` - Campos requeridos
 - `it validates name length` - Máximo 50 caracteres
 - `it validates content length` - Máximo 500 caracteres
 
 ✅ **Formato de respuesta:**
+
 - `it truncates long parent message in response` - Trunca a 50 chars + "..."
 - `it shows full parent message if short` - Muestra completo si es corto
 
 ### GetMessageThreadToolTest (8 tests)
 
 ✅ **Funcionalidad básica:**
+
 - `it can get a message thread with replies` - Muestra hilo completo
 - `it shows message with no replies` - Maneja mensaje sin respuestas
 - `it shows reactions on replies` - Incluye reacciones de las respuestas
 
 ✅ **Validaciones:**
+
 - `it fails when message does not exist` - Error si no existe el mensaje
 - `it validates required message_id` - Campo message_id requerido
 
 ✅ **Formato:**
+
 - `it shows correct reply count for single reply` - Singular "1 reply" (no "1 replies")
 - `it shows relative timestamps` - Formato "X ago"
 - `it orders replies chronologically` - Orden por created_at
@@ -285,7 +297,8 @@ get-message-thread {
 
 **Usuario:** "Responde a ese mensaje diciendo que estoy de acuerdo"
 
-**Asistente usa:** 
+**Asistente usa:**
+
 ```json
 reply-to-message {
   parent_message_id: 1,
@@ -299,16 +312,19 @@ reply-to-message {
 ## 📊 **Estadísticas Actualizadas**
 
 ### Tests Totales
+
 - **74 tests pasando** (+17 nuevos)
 - **196 assertions** (+48 nuevas)
 - **0 fallos**
 - **Duración:** ~4.5 segundos
 
 ### Herramientas MCP
+
 - **11 herramientas activas** (9 anteriores + 2 nuevas)
 - **100% de cobertura** en tests
 
 ### Base de Datos
+
 - **6 migraciones** (4 originales + 1 reactions + 1 threads)
 - **3 tablas principales:** users, messages, reactions
 - **2 relaciones auto-referenciadas:** Message → parent, Message → replies
@@ -350,6 +366,7 @@ $thread = Message::with('replies.reactions')
 ## 🔜 **Próximas Mejoras Sugeridas**
 
 ### Para Threads:
+
 1. **Respuestas anidadas** - Responder a respuestas (multi-nivel)
 2. **Notificaciones** - Notificar al autor cuando alguien responde
 3. **Thread subscription** - Seguir hilos de interés
@@ -360,6 +377,7 @@ $thread = Message::with('replies.reactions')
 8. **Thread search** - Buscar dentro de un hilo específico
 
 ### Integraciones:
+
 - Combinar con reacciones (ya soportado)
 - Combinar con búsquedas (buscar en replies)
 - Combinar con usuarios (replies por usuario)
@@ -384,6 +402,7 @@ $thread = Message::with('replies.reactions')
 ## 🎉 **¡Phase 3 Completada!**
 
 El sistema de hilos/threads está 100% funcional y testeado. Los usuarios ahora pueden:
+
 - ✅ Responder a mensajes específicos
 - ✅ Ver hilos de conversación completos
 - ✅ Ver reacciones en respuestas

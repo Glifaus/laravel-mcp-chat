@@ -140,4 +140,3 @@ it('shows reply ID in response', function () {
     $response->assertOk();
     $response->assertSee('Reply ID:');
 });
-

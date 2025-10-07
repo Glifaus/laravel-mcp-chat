@@ -37,7 +37,7 @@ class Message extends Model
         'channel',  // Nuevo campo
         'parent_id',
     ];
-    
+
     // ... relaciones ...
 }
 ```
@@ -49,18 +49,21 @@ class Message extends Model
 Lista todos los canales activos con estadísticas.
 
 **Parámetros:**
+
 - `limit` (opcional): Máximo de canales a retornar (default: 50, max: 100)
 - `sort_by` (opcional): Ordenar por "count" (mensajes) o "activity" (último mensaje). Default: "count"
 
 **Ejemplo de Uso:**
+
 ```json
 {
-  "limit": 20,
-  "sort_by": "count"
+    "limit": 20,
+    "sort_by": "count"
 }
 ```
 
 **Respuesta:**
+
 ```
 📋 **Active Channels** (3 total)
 
@@ -75,6 +78,7 @@ Lista todos los canales activos con estadísticas.
 ```
 
 **Características:**
+
 - Cuenta solo mensajes raíz (excluye replies)
 - Ordena por cantidad de mensajes (descendente) por defecto
 - Muestra timestamps relativos
@@ -86,18 +90,21 @@ Lista todos los canales activos con estadísticas.
 Obtiene mensajes de un canal específico.
 
 **Parámetros:**
+
 - `channel` (requerido): Nombre del canal
 - `limit` (opcional): Máximo de mensajes (default: 50, max: 100)
 
 **Ejemplo de Uso:**
+
 ```json
 {
-  "channel": "python",
-  "limit": 10
+    "channel": "python",
+    "limit": 10
 }
 ```
 
 **Respuesta:**
+
 ```
 💬 **Messages from #python** (8 messages)
 
@@ -111,6 +118,7 @@ Check out this Python tutorial...
 ```
 
 **Características:**
+
 - Filtra por canal específico
 - Excluye respuestas (solo mensajes raíz)
 - Muestra reacciones de cada mensaje
@@ -123,20 +131,23 @@ Check out this Python tutorial...
 Envía un mensaje a un canal específico.
 
 **Parámetros:**
+
 - `name` (requerido): Nombre del usuario (1-50 caracteres)
 - `content` (requerido): Contenido del mensaje (1-500 caracteres)
 - `channel` (opcional): Canal donde enviar el mensaje (default: 'general', max: 50 caracteres)
 
 **Ejemplo de Uso:**
+
 ```json
 {
-  "name": "Alice",
-  "content": "Hello from Python channel!",
-  "channel": "python"
+    "name": "Alice",
+    "content": "Hello from Python channel!",
+    "channel": "python"
 }
 ```
 
 **Respuesta:**
+
 ```
 ✅ Message sent to **#python**!
 
@@ -144,6 +155,7 @@ Envía un mensaje a un canal específico.
 ```
 
 **Cambios:**
+
 - Añadido parámetro opcional `channel`
 - Validación de longitud del canal (max 50 caracteres)
 - Respuesta incluye el nombre del canal
@@ -154,20 +166,23 @@ Envía un mensaje a un canal específico.
 Responde a un mensaje, heredando automáticamente su canal.
 
 **Parámetros:**
+
 - `message_id` (requerido): ID del mensaje padre
 - `name` (requerido): Nombre del usuario
 - `content` (requerido): Contenido de la respuesta
 
 **Ejemplo de Uso:**
+
 ```json
 {
-  "message_id": 42,
-  "name": "Bob",
-  "content": "I agree with your point!"
+    "message_id": 42,
+    "name": "Bob",
+    "content": "I agree with your point!"
 }
 ```
 
 **Respuesta:**
+
 ```
 ✅ Reply successfully posted in **#python**!
 
@@ -180,6 +195,7 @@ Your reply: "I agree with your point!"
 ```
 
 **Cambios:**
+
 - Hereda automáticamente el canal del mensaje padre
 - Respuesta incluye el nombre del canal
 - No permite especificar canal manualmente (siempre hereda)
@@ -270,55 +286,57 @@ canal: q1-planning
 ### Crear y Usar un Nuevo Canal
 
 1. **Enviar primer mensaje al canal:**
-   ```json
-   {
-     "name": "Alice",
-     "content": "Starting a new discussion about TypeScript!",
-     "channel": "typescript"
-   }
-   ```
+
+    ```json
+    {
+        "name": "Alice",
+        "content": "Starting a new discussion about TypeScript!",
+        "channel": "typescript"
+    }
+    ```
 
 2. **Listar canales para verificar:**
-   ```json
-   {
-     "limit": 10
-   }
-   ```
-   
+    ```json
+    {
+        "limit": 10
+    }
+    ```
 3. **Consultar mensajes del nuevo canal:**
-   ```json
-   {
-     "channel": "typescript",
-     "limit": 50
-   }
-   ```
+    ```json
+    {
+        "channel": "typescript",
+        "limit": 50
+    }
+    ```
 
 ### Conversación en Canal Específico
 
 1. **Alice envía mensaje en #python:**
-   ```json
-   {
-     "name": "Alice",
-     "content": "What's the best way to handle async operations?",
-     "channel": "python"
-   }
-   ```
+
+    ```json
+    {
+        "name": "Alice",
+        "content": "What's the best way to handle async operations?",
+        "channel": "python"
+    }
+    ```
 
 2. **Bob responde (automáticamente en #python):**
-   ```json
-   {
-     "message_id": 123,
-     "name": "Bob",
-     "content": "I recommend using asyncio with async/await"
-   }
-   ```
+
+    ```json
+    {
+        "message_id": 123,
+        "name": "Bob",
+        "content": "I recommend using asyncio with async/await"
+    }
+    ```
 
 3. **Ver hilo completo (incluye canal):**
-   ```json
-   {
-     "message_id": 123
-   }
-   ```
+    ```json
+    {
+        "message_id": 123
+    }
+    ```
 
 ## Tests
 
@@ -365,6 +383,7 @@ CREATE INDEX messages_channel_index ON messages(channel);
 ```
 
 **Beneficios:**
+
 - Consultas rápidas por canal (`WHERE channel = 'python'`)
 - Agrupaciones eficientes (`GROUP BY channel`)
 - Ordenamiento optimizado en listados
@@ -407,6 +426,7 @@ Message::query()
 ## Mejoras Futuras Sugeridas
 
 ### 1. Gestión de Canales
+
 ```php
 // CreateChannelTool
 $channel = Channel::create([
@@ -426,6 +446,7 @@ $channel->delete();
 ```
 
 ### 2. Metadata de Canales
+
 ```php
 Schema::create('channels', function (Blueprint $table) {
     $table->id();
@@ -440,6 +461,7 @@ Schema::create('channels', function (Blueprint $table) {
 ```
 
 ### 3. Miembros de Canal
+
 ```php
 Schema::create('channel_members', function (Blueprint $table) {
     $table->id();
@@ -452,6 +474,7 @@ Schema::create('channel_members', function (Blueprint $table) {
 ```
 
 ### 4. Canales Directos (DMs)
+
 ```php
 // Crear canal privado entre dos usuarios
 $dm = Channel::createDirect('Alice', 'Bob');
@@ -459,6 +482,7 @@ $dm = Channel::createDirect('Alice', 'Bob');
 ```
 
 ### 5. Búsqueda en Canal Específico
+
 ```php
 // Extender SearchMessagesTool
 SearchMessagesTool::invoke([
@@ -468,6 +492,7 @@ SearchMessagesTool::invoke([
 ```
 
 ### 6. Subscripciones y Notificaciones
+
 ```php
 // SubscribeToChannelTool
 ChannelSubscription::create([
@@ -539,6 +564,7 @@ Consultas Optimizadas:
 El sistema de canales de la Fase 4 proporciona una forma simple pero efectiva de organizar conversaciones por tópicos. La implementación es minimalista pero extensible, con un diseño que facilita agregar características más avanzadas en el futuro.
 
 **Estadísticas Finales:**
+
 - ✅ 2 nuevas herramientas MCP
 - ✅ 2 herramientas actualizadas
 - ✅ 14 nuevos tests (6 + 8)
@@ -549,6 +575,7 @@ El sistema de canales de la Fase 4 proporciona una forma simple pero efectiva de
 - ✅ 235 aserciones totales
 
 **Compatibilidad:**
+
 - ✅ Compatible con sistema de hilos (Fase 3)
 - ✅ Compatible con reacciones (Fase 2)
 - ✅ Compatible con búsqueda y filtros (Fase 1)

@@ -43,7 +43,7 @@ final class GetChannelMessagesTool extends Tool
         if ($messages->isEmpty()) {
             return Response::text(
                 "No messages found in channel **#{$channel}**.\n\n" .
-                "💡 Use [send-message] with channel parameter to post the first message!"
+                    "💡 Use [send-message] with channel parameter to post the first message!"
             );
         }
 

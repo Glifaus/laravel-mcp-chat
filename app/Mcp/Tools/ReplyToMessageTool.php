@@ -55,10 +55,10 @@ final class ReplyToMessageTool extends Tool
         }
 
         return Response::text(
-            "Reply successfully posted in **#{$parentMessage->channel}**!\n\n".
-            "**Replying to:** {$parentMessage->name}: \"{$parentPreview}\"\n".
-            "**Your reply:** {$reply->content}\n\n".
-            "Reply ID: #{$reply->id}"
+            "Reply successfully posted in **#{$parentMessage->channel}**!\n\n" .
+                "**Replying to:** {$parentMessage->name}: \"{$parentPreview}\"\n" .
+                "**Your reply:** {$reply->content}\n\n" .
+                "Reply ID: #{$reply->id}"
         );
     }
 
