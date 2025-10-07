@@ -4,7 +4,14 @@ declare(strict_types=1);
 
 namespace App\Mcp\Servers;
 
+use App\Mcp\Tools\AddReactionTool;
+use App\Mcp\Tools\GetMessageReactionsTool;
+use App\Mcp\Tools\GetMessagesByDateRangeTool;
+use App\Mcp\Tools\GetMessagesByUserTool;
 use App\Mcp\Tools\GetMessageTool;
+use App\Mcp\Tools\GetUsersListTool;
+use App\Mcp\Tools\RemoveReactionTool;
+use App\Mcp\Tools\SearchMessagesTool;
 use App\Mcp\Tools\SendMessageTool;
 use Laravel\Mcp\Server;
 
@@ -25,8 +32,23 @@ final class Laravelchat extends Server
      */
     protected string $instructions = <<<'MARKDOWN'
     This is the Laravelchat MCP server. It is a simple chat application built with Laravel and Laravel MCP. The application allows users to send and receive messages in real-time. The messages are stored in a database and can be retrieved by any user.
-    Users can [send-message] to share their thoughts and engage in discussions.
-    Or they can [get-messages] to see what others have shared.
+
+    **Basic Features:**
+    - Use [send-message] to share your thoughts and engage in discussions
+    - Use [get-messages] to see what others have shared
+
+    **Search & Filter:**
+    - Use [search-messages] to find messages containing specific keywords
+    - Use [get-messages-by-user] to see all messages from a particular user
+    - Use [get-messages-by-date-range] to filter messages by date
+
+    **Reactions:**
+    - Use [add-reaction] to react to messages with emojis (👍, ❤️, 😂, 🎉, etc.)
+    - Use [remove-reaction] to remove your reactions
+    - Use [get-message-reactions] to see all reactions on a message
+
+    **Users:**
+    - Use [get-users-list] to see all active users and their statistics
     MARKDOWN;
 
     /**
@@ -37,6 +59,13 @@ final class Laravelchat extends Server
     protected array $tools = [
         SendMessageTool::class,
         GetMessageTool::class,
+        SearchMessagesTool::class,
+        GetMessagesByUserTool::class,
+        GetMessagesByDateRangeTool::class,
+        AddReactionTool::class,
+        RemoveReactionTool::class,
+        GetMessageReactionsTool::class,
+        GetUsersListTool::class,
     ];
 
     /**
