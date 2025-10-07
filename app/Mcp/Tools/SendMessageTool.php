@@ -41,10 +41,12 @@ final class SendMessageTool extends Tool
         $request->validate([
             'name' => 'required|string|min:1|max:50',
             'content' => 'required|string|min:1|max:500',
+            'channel' => 'string|min:1|max:50',
         ]);
 
         $name = $request->string('name')->value();
         $content = $request->string('content')->value();
+        $channel = $request->string('channel', 'general')->value();
 
         if (in_array(mb_strtolower($name), $this->ignorableNames, true)) {
             return Response::error(
@@ -54,14 +56,12 @@ final class SendMessageTool extends Tool
             );
         }
 
-        $action->handle($name, $content);
+        $message = $action->handle($name, $content, $channel);
 
         return Response::text(
-            <<<'MARKDOWN'
-        Your message has been successfully sent to the chat.
-
-        You may show to the user the latest messages by using the [get-messages] tool.
-        MARKDOWN
+            "Your message has been successfully sent to **#{$channel}**.\n\n" .
+            "Message ID: #{$message->id}\n\n" .
+            "💡 You may view messages in this channel using [get-channel-messages]."
         );
     }
 
@@ -92,6 +92,10 @@ final class SendMessageTool extends Tool
                 ->max(500)
                 ->description('The content of the message to send.')
                 ->required(),
+            'channel' => $schema->string()
+                ->min(1)
+                ->max(50)
+                ->description('The channel to send the message to (e.g., "general", "php", "python"). Defaults to "general".'),
         ];
     }
 }

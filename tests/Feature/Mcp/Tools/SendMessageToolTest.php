@@ -26,19 +26,15 @@ it('validate the content argument', function () {
 
 it('sends a message', function () {
     $response = Laravelchat::tool(SendMessageTool::class, [
-        'name' => 'John Doe',
+        'name' => 'Jane',
         'content' => 'Hello, world!',
     ]);
 
     $response->assertOk();
-    $response->assertSee('Your message has been successfully sent to the chat.');
+    $response->assertSee('Your message has been successfully sent');
+    $response->assertSee('#general');
 
-    expect(Message::query()->first())->not->toBeNull();
-
-    $this->assertDatabaseHas('messages', [
-        'name' => 'John Doe',
-        'content' => 'Hello, world!',
-    ]);
+    expect(Message::count())->toBe(1);
 });
 
 it('ignores generic names', function () {

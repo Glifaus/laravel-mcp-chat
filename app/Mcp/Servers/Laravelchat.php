@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace App\Mcp\Servers;
 
 use App\Mcp\Tools\AddReactionTool;
+use App\Mcp\Tools\GetChannelMessagesTool;
+use App\Mcp\Tools\GetChannelsTool;
 use App\Mcp\Tools\GetMessageReactionsTool;
 use App\Mcp\Tools\GetMessagesByDateRangeTool;
 use App\Mcp\Tools\GetMessagesByUserTool;
+use App\Mcp\Tools\GetMessageThreadTool;
 use App\Mcp\Tools\GetMessageTool;
 use App\Mcp\Tools\GetUsersListTool;
 use App\Mcp\Tools\RemoveReactionTool;
+use App\Mcp\Tools\ReplyToMessageTool;
 use App\Mcp\Tools\SearchMessagesTool;
 use App\Mcp\Tools\SendMessageTool;
 use Laravel\Mcp\Server;
@@ -49,6 +53,15 @@ final class Laravelchat extends Server
 
     **Users:**
     - Use [get-users-list] to see all active users and their statistics
+
+    **Threads:**
+    - Use [reply-to-message] to reply to a specific message and create a thread
+    - Use [get-message-thread] to view a message with all its replies
+
+    **Channels:**
+    - Use [get-channels] to see all available channels
+    - Use [get-channel-messages] to view messages from a specific channel
+    - Use [send-message] with channel parameter to post in a specific channel
     MARKDOWN;
 
     /**
@@ -66,6 +79,10 @@ final class Laravelchat extends Server
         RemoveReactionTool::class,
         GetMessageReactionsTool::class,
         GetUsersListTool::class,
+        ReplyToMessageTool::class,
+        GetMessageThreadTool::class,
+        GetChannelsTool::class,
+        GetChannelMessagesTool::class,
     ];
 
     /**

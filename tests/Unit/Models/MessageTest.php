@@ -14,5 +14,7 @@ test('to array', function () {
             'content',
             'created_at',
             'updated_at',
+            'parent_id',
+            'channel',
         ]);
 });

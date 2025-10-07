@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class Message extends Model
@@ -19,5 +20,21 @@ final class Message extends Model
     public function reactions(): HasMany
     {
         return $this->hasMany(Reaction::class);
+    }
+
+    /**
+     * Get the parent message (if this is a reply).
+     */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Message::class, 'parent_id');
+    }
+
+    /**
+     * Get all replies to this message.
+     */
+    public function replies(): HasMany
+    {
+        return $this->hasMany(Message::class, 'parent_id');
     }
 }
