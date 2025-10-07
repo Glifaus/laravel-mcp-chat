@@ -22,10 +22,6 @@ final class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // force https in production
-        if (config('app.env') !== 'local') {
-            \Illuminate\Support\Facades\URL::forceScheme('https');
-        }
         Model::unguard();
     }
 }
