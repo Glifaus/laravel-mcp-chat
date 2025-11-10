@@ -17,7 +17,6 @@
     "intelephense.files.exclude": [
         "**/.git/**",
         "**/node_modules/**",
-        "**/vendor/**",
         "storage/**",
         "bootstrap/cache/**",
         "public/build/**"
@@ -36,7 +35,7 @@
         "bootstrap/cache/**": true,
         "public/build/**": true
     },
-    "php.validate.executablePath": "/usr/local/bin/php",
+    "php.validate.enable": false,
     "php.suggest.basic": false,
     "editor.codeActionsOnSave": {
         "source.fixAll": "explicit"
