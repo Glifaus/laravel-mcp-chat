@@ -1,0 +1,43 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Listen for Xdebug (Docker/Devcontainer)",
+      "type": "php",
+      "request": "launch",
+      "port": 9003,
+      "stopOnEntry": false,
+      "hostname": "0.0.0.0",
+      "pathMappings": {
+        "/workspaces/laravel-mcp-chat": "${workspaceFolder}"
+      },
+      "xdebugSettings": {
+        "max_children": 256,
+        "max_data": 2048,
+        "show_hidden": 1
+      }
+    },
+    {
+      "name": "Artisan tinker (PHP CLI)",
+      "type": "php",
+      "request": "launch",
+      "program": "/usr/local/bin/php",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "artisan",
+        "tinker"
+      ],
+      "runtimeArgs": [],
+      "port": 9003,
+      "pathMappings": {
+        "/workspaces/laravel-mcp-chat": "${workspaceFolder}"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Laravel: Debug + Server",
+      "configurations": ["Listen for Xdebug (Docker/Devcontainer)"]
+    }
+  ]
+}
