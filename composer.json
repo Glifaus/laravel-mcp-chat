@@ -9,7 +9,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.4.0",
+        "php": "^8.3.0",
         "laravel/framework": "^12.30.1",
         "laravel/mcp": "^0.2.0",
         "nunomaduro/essentials": "^1.0.1"
