@@ -13,7 +13,7 @@
     "[blade]": {
         "editor.defaultFormatter": "shufo.vscode-blade-formatter"
     },
-    "intelephense.environment.phpVersion": "8.3",
+    "intelephense.environment.phpVersion": "8.4",
     "intelephense.files.exclude": [
         "**/.git/**",
         "**/node_modules/**",
