@@ -1,19 +1,7 @@
 {
-  "name": "Laravel MCP Chat (Tech Day)",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
-  "features": {
-    "ghcr.io/devcontainers/features/php:1": {
-      "version": "8.4",
-      "installComposer": true
-    },
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "lts"
-    },
-    "ghcr.io/devcontainers/features/apt-packages:1": {
-      "packages": "sqlite3,libsqlite3-dev"
-    }
-  },
-  "postCreateCommand": "sudo apt-get update -y && composer install && npm install && php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\" && php artisan key:generate && php artisan migrate --graceful --ansi || true && sudo mkdir -p /etc/php/8.4/mods-available && sudo cp .devcontainer/php/xdebug.ini /etc/php/8.4/mods-available/xdebug.ini && sudo phpenmod xdebug",
+  "name": "Laravel MCP Chat (Tech Day) - PHP 8.3 (no Features)",
+  "image": "mcr.microsoft.com/devcontainers/php:8.3",
+  "postCreateCommand": "sudo apt-get update -y && sudo apt-get install -y sqlite3 libsqlite3-dev && composer install && bash -lc 'export NVM_DIR=/usr/local/share/nvm; [ -s \"$NVM_DIR/nvm.sh\" ] || (mkdir -p \"$NVM_DIR\" && curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash); . \"$NVM_DIR/nvm.sh\" && nvm install --lts && nvm use --lts && (command -v npm >/dev/null 2>&1 && (npm ci || npm install))' && php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\" && php artisan key:generate && php artisan migrate --graceful --ansi || true && sudo mkdir -p /usr/local/etc/php/conf.d && sudo cp .devcontainer/php/xdebug.ini /usr/local/etc/php/conf.d/99-xdebug.ini",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -28,10 +16,7 @@
   },
   "forwardPorts": [8000],
   "portsAttributes": {
-    "8000": {
-      "label": "Laravel",
-      "onAutoForward": "openBrowser"
-    }
+    "8000": { "label": "Laravel", "onAutoForward": "openBrowser" }
   },
   "postStartCommand": "php artisan serve --host 0.0.0.0 --port 8000",
   "remoteUser": "vscode"
