@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-// MCP server will be implemented during the Tech Day workshop
-// use App\Mcp\Servers\Laravelchat;
-// use Laravel\Mcp\Facades\Mcp;
+use App\Mcp\Servers\LaravelChat;
+use Laravel\Mcp\Facades\Mcp;
 
-// Mcp::web('/mcp/chat', Laravelchat::class);
+// Mcp::web('/mcp/demo', \App\Mcp\Servers\PublicServer::class);
+Mcp::web('/mcp/laravel-chat', LaravelChat::class);

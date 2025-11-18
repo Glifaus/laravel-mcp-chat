@@ -11,12 +11,11 @@ final readonly class CreateMessageAction
     /**
      * Execute the action.
      */
-    public function handle(string $name, string $content, string $channel = 'general'): Message
+    public function handle(string $name, string $content): Message
     {
         return Message::query()->create([
             'name' => $name,
             'content' => $content,
-            'channel' => $channel,
         ]);
     }
 }

@@ -7,7 +7,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Message>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Message>
  */
 final class MessageFactory extends Factory
 {
@@ -19,18 +19,8 @@ final class MessageFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'content' => fake()->text(),
+            'name' => $this->faker->name(),
+            'content' => $this->faker->paragraph(),
         ];
-    }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): self
-    {
-        return $this->state(fn (array $attributes): array => [
-            'email_verified_at' => null,
-        ]);
     }
 }

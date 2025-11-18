@@ -26,7 +26,7 @@ final class AppServiceProvider extends ServiceProvider
         // Desactivamos el guard
         Model::unguard();
         // Si usamos SQLite en /tmp (Vercel), aseguramos que la DB existe y está migrada
-        if (config('database.default') === 'sqlite') {
+        /*if (config('database.default') === 'sqlite') {
             $path = config('database.connections.sqlite.database');
 
             // En Vercel solo /tmp es escribible
@@ -43,6 +43,6 @@ final class AppServiceProvider extends ServiceProvider
                     // \Log::error('Migrate failed: '.$e->getMessage());
                 }
             }
-        }
+        }*/
     }
 }

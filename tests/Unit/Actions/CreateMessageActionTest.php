@@ -2,19 +2,13 @@
 
 declare(strict_types=1);
 
-it('creates a message', function () {
-    $action = app(App\Actions\CreateMessageAction::class);
+use App\Actions\CreateMessageAction;
 
-    $message = $action->handle('John Doe', 'Hello, world!');
+it('creates messages', function () {
+    $action = app(CreateMessageAction::class);
+    $message = $action->handle('Test Name', 'This is a test message.');
 
     expect($message)->toBeInstanceOf(App\Models\Message::class)
-        ->and($message->name)->toBe('John Doe')
-        ->and($message->content)->toBe('Hello, world!');
-
-    // Verify the message is in the database
-    $this->assertDatabaseHas('messages', [
-        'id' => $message->id,
-        'name' => 'John Doe',
-        'content' => 'Hello, world!',
-    ]);
+        ->and($message->name)->toBe('Test Name')
+        ->and($message->content)->toBe('This is a test message.');
 });

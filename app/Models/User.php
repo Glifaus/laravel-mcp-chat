@@ -24,7 +24,9 @@ use Illuminate\Notifications\Notifiable;
 final class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
+
+    use Notifiable;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,7 +43,7 @@ final class User extends Authenticatable implements MustVerifyEmail
      *
      * @return array<string, string>
      */
-    public function casts(): array
+    protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
