@@ -16,7 +16,7 @@ Esta rama es un starter didáctico para el Tech Day. Incluye modelos, migracione
 - [ ] (Opcional) Sembrar datos: `php artisan db:seed --class=Database\\Seeders\\KnowmadmoodSeeder`
 - [ ] Iniciar el servidor: `php artisan serve --host=0.0.0.0 --port=8000`
 - [ ] Crear el servidor MCP en `app/Mcp/Servers/Laravelchat.php`
-- [ ] Implementar herramientas básicas: `send-message`, `get-messages`, `reply-to-message`
+- [ ] Implementar herramientas básicas: `send-message`, `get-messages`
 - [ ] Probar `/mcp/chat` con payloads de ejemplo (cliente MCP)
 - [ ] Integrar un agente mínimo con Laravel Boost que consuma esas herramientas
 - [ ] Ejercicio: responder a un mensaje y listar el hilo
@@ -66,7 +66,6 @@ Consultas típicas optimizadas:
 - Crear servidor MCP "Laravelchat" y registrar:
   - `send-message` (crear mensajes; canal opcional)
   - `get-messages` (listar últimos mensajes)
-  - `reply-to-message` (responder y crear hilos)
 - Probar las herramientas con un cliente MCP
 - Mostrar un agente de Laravel Boost consumiendo estas herramientas
 
