@@ -276,7 +276,7 @@ final class KnowmadmoodSeeder extends Seeder
         ]);
 
         $totalMessages = Message::count();
-        $this->command->info("✅ {$totalMessages} mensajes creados en 6 canales diferentes");
+        $this->command->info(sprintf('✅ %s mensajes creados en 6 canales diferentes', $totalMessages));
 
         // Añadir reacciones variadas a mensajes principales y respuestas
 
@@ -331,17 +331,17 @@ final class KnowmadmoodSeeder extends Seeder
         Reaction::query()->create(['message_id' => $msg24->id, 'user_name' => 'Alberto', 'emoji' => '�']);
 
         $totalReactions = Reaction::count();
-        $this->command->info("✅ {$totalReactions} reacciones añadidas");
+        $this->command->info(sprintf('✅ %s reacciones añadidas', $totalReactions));
         $this->command->info('');
         $this->command->info('🎉 ¡Base de datos poblada exitosamente!');
         $this->command->info('');
         $this->command->info('📊 Estadísticas finales:');
-        $this->command->info('   - Mensajes totales: ' . Message::count());
-        $this->command->info('   - Mensajes principales: ' . Message::whereNull('parent_id')->count());
-        $this->command->info('   - Respuestas (hilos): ' . Message::whereNotNull('parent_id')->count());
-        $this->command->info('   - Reacciones: ' . Reaction::count());
-        $this->command->info('   - Usuarios únicos: ' . Message::query()->distinct('name')->count('name'));
-        $this->command->info('   - Canales activos: ' . Message::query()->distinct('channel')->count('channel'));
+        $this->command->info('   - Mensajes totales: '.Message::count());
+        $this->command->info('   - Mensajes principales: '.Message::whereNull('parent_id')->count());
+        $this->command->info('   - Respuestas (hilos): '.Message::whereNotNull('parent_id')->count());
+        $this->command->info('   - Reacciones: '.Reaction::count());
+        $this->command->info('   - Usuarios únicos: '.Message::query()->distinct('name')->count('name'));
+        $this->command->info('   - Canales activos: '.Message::query()->distinct('channel')->count('channel'));
         $this->command->info('');
         $this->command->info('📂 Canales disponibles:');
 
@@ -354,7 +354,7 @@ final class KnowmadmoodSeeder extends Seeder
             ->get();
 
         foreach ($channels as $channel) {
-            $this->command->info("   - #{$channel->channel}: {$channel->message_count} mensajes");
+            $this->command->info(sprintf('   - #%s: %s mensajes', $channel->channel, $channel->message_count));
         }
     }
 }
